@@ -2,7 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
-
+use Cake\Filesystem\File; // Load Class File for delete file
 /**
  * Posts Controller
  *
@@ -12,6 +12,13 @@ use App\Controller\AppController;
  */
 class PostsController extends AppController
 {
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Base');
+        $this->viewBuilder()->setLayout('admin');
+    }
     /**
      * Index method
      *

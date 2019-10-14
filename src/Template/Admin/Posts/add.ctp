@@ -13,7 +13,7 @@
     </ul>
 </nav>
 <div class="posts form large-9 medium-8 columns content">
-    <?= $this->Form->create($post) ?>
+    <?= $this->Form->create($post,['type'=>'file']) ?>
     <fieldset>
         <legend><?= __('Add Post') ?></legend>
         <?php

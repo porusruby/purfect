@@ -25,6 +25,11 @@ class UsersController extends AppController
         $this->set(compact('users'));
     }
 
+    public function dashboard()
+    {
+        $this->render();
+    }
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
