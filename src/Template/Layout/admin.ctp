@@ -24,6 +24,10 @@
     <?=  $this->Html->css('/backend/vendors/jqvmap/dist/jqvmap.min.css'); ?>
 
     <?=  $this->Html->css('/backend/assets/css/style.css'); ?>
+    <!-- Datatables -->
+    <?=  $this->Html->css('/backend/vendors/bootstrap/dist/css/bootstrap.min.css'); ?>
+    <?=  $this->Html->css('/backend/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>
+    <?=  $this->Html->css('/backend/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css'); ?>
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -87,11 +91,13 @@
     <?=  $this->Html->script('/backend/vendors/bootstrap/dist/js/bootstrap.min.js'); ?>
     
     <?=  $this->Html->script('/backend/assets/js/main.js'); ?>
+   
+    
+    <!--
+    <?=  $this->Html->script('/backend/assets/js/dashboard.js'); ?>
 
     <?=  $this->Html->script('/backend/vendors/chart.js/dist/Chart.bundle.min.js'); ?>
-   
-    <?=  $this->Html->script('/backend/assets/js/dashboard.js'); ?>
-    
+
     <?=  $this->Html->script('/backend/assets/js/widgets.js'); ?>
     
     <?=  $this->Html->script('/backend/vendors/jqvmap/dist/jquery.vmap.min.js'); ?>
@@ -99,24 +105,61 @@
     <?=  $this->Html->script('/backend/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js'); ?>
     
     <?=  $this->Html->script('/backend/vendors/jqvmap/dist/maps/jquery.vmap.world.js'); ?>
+    -->
+    <!-- Datatables -->
+    <?=  $this->Html->script('/backend/vendors/datatables.net/js/jquery.dataTables.min.js'); ?>
+    <?=  $this->Html->script('/backend/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js'); ?>
+    <?=  $this->Html->script('/backend/vendors/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>
+    <?=  $this->Html->script('/backend/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'); ?>
+    <!--
+    <script src="vendors/jszip/dist/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
+    -->
 
     <script>
-        (function($) {
-            "use strict";
+        (function ($) {
+    //    "use strict";
+    /*  Data Table
+    -------------*/
 
-            jQuery('#vmap').vectorMap({
-                map: 'world_en',
-                backgroundColor: null,
-                color: '#ffffff',
-                hoverOpacity: 0.7,
-                selectedColor: '#1de9b6',
-                enableZoom: true,
-                showTooltip: true,
-                values: sample_data,
-                scaleColors: ['#1de9b6', '#03a9f5'],
-                normalizeFunction: 'polynomial'
-            });
-        })(jQuery);
+    $('#bootstrap-data-table').DataTable({
+        lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+    });
+
+    $('#bootstrap-data-table-export').DataTable({
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+    });
+
+	$('#myTable').DataTable( {
+        initComplete: function () {
+				this.api().columns().every( function () {
+					var column = this;
+					var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+							);
+
+							column
+								.search( val ? '^'+val+'$' : '', true, false )
+								.draw();
+						} );
+
+					column.data().unique().sort().each( function ( d, j ) {
+						select.append( '<option value="'+d+'">'+d+'</option>' )
+					} );
+				} );
+			}
+		} );
+
+    })(jQuery);
     </script>
 
 </body>
