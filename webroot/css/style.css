@@ -449,7 +449,7 @@ div.message.error {
 }
 
 div.message.error:before {
-    padding: 11px 16px 14px 7px;
+    padding: 8px 16px 14px 7px;
     color: #C3232D;
     content: "x";
 }

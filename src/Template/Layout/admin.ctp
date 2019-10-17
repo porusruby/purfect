@@ -91,6 +91,8 @@
     <?=  $this->Html->script('/backend/vendors/bootstrap/dist/js/bootstrap.min.js'); ?>
     
     <?=  $this->Html->script('/backend/assets/js/main.js'); ?>
+
+    <?=  $this->Html->script('/backend/vendors/ckeditor/ckeditor.js'); ?>
    
     
     <!--
@@ -122,10 +124,19 @@
     -->
 
     <script>
+    
+    var roxyFileman = '<?php echo $this->request->getAttribute("webroot")."backend/vendors/filemanager/dialog.php" ?>';
         (function ($) {
     //    "use strict";
     /*  Data Table
     -------------*/
+    <?php if( ($this->request->getParam('controller') == 'Posts' OR $this->request->getParam('controller') == 'Pages' ) && ( $this->request->getParam('action') == 'add' OR $this->request->getParam('action') == 'edit')   ) { ?>
+    $(function(){
+    CKEDITOR.replace( 'editor1',{filebrowserBrowseUrl:roxyFileman+'?type=2&editor=ckeditor&fldr=',
+                                    filebrowserImageBrowseUrl:roxyFileman+'?type=1&editor=ckeditor&fldr=',
+                                    filebrowserUploadUrl: roxyFileman+'?type=2&editor=ckeditor&fldr='}); 
+    });
+    <?php } ?>
 
     $('#bootstrap-data-table').DataTable({
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],

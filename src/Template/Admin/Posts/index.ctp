@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
     <div class="row">
-
         <div class="col-md-12">
+        <?= $this->Html->link('New Posts', ['action' => 'add'],['class'=>'btn btn-primary']) ?>
                 <div class="card">
                     <div class="card-header">
                         <strong class="card-title">Data Posts</strong>
