@@ -22,6 +22,10 @@
                                 <td><?= h($category->name) ?></td>
                                 <td><?= h($category->slug) ?></td>
                                 <td><?= h($category->description) ?></td>
+                                <td>
+                                <?= $this->Html->link("<i class='fa fa-pencil-square-o'></i> Edit", ['action' => 'edit', $category->id],['class'=>'btn btn-info','escape'=>false]) ?>
+                                <?= $this->Form->postLink("<i class='fa fa-trash-o'></i> Delete", ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete #{0} ?', $category->name),'class'=>'btn btn-danger','escape'=>false]) ?>
+                                </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

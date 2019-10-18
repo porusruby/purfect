@@ -22,7 +22,6 @@
     <?=  $this->Html->css('/backend/vendors/flag-icon-css/css/flag-icon.min.css'); ?>
     <?=  $this->Html->css('/backend/vendors/selectFX/css/cs-skin-elastic.css'); ?>
     <?=  $this->Html->css('/backend/vendors/jqvmap/dist/jqvmap.min.css'); ?>
-
     <?=  $this->Html->css('/backend/assets/css/style.css'); ?>
     <!-- Datatables -->
     <?=  $this->Html->css('/backend/vendors/bootstrap/dist/css/bootstrap.min.css'); ?>
@@ -30,7 +29,6 @@
     <?=  $this->Html->css('/backend/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css'); ?>
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
 </head>
 
 <body>
