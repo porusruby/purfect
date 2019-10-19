@@ -30,6 +30,5 @@ configuration relevant for your application.
 
 ## Layout
 
-The app skeleton uses a subset of [Foundation](http://foundation.zurb.com/) (v5) CSS
-framework by default. You can, however, replace it with any other library or
+The app Layout use OS Template and Safee Admin. You can, however, replace it with any other library or
 custom styles.
