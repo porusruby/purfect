@@ -23,12 +23,15 @@ $this->assign('title','Add Posts')
                         <textarea name="body" id="editor1" ></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="">Title</label>
-                        <input type="text" name="title" id="title">
+                        <label for="">Image</label>
+                        <input type="file" name="myFile" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="">Title</label>
-                        <input type="text" name="title" id="title">
+                        <label for="">Published</label>
+                        <select name="published" >
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
                     </div>
                 </div>
                 <div class="card-footer">

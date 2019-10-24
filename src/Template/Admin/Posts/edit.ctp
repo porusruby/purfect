@@ -4,20 +4,6 @@
  * @var \App\Model\Entity\Post $post
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $post->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $post->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Posts'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
 <div class="posts form large-9 medium-8 columns content">
     <?= $this->Form->create($post) ?>
     <fieldset>
@@ -33,3 +19,41 @@
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                        <strong class="card-title">Data Posts</strong>
+                </div>
+                <?= $this->Form->create($post,['type'=>'file']) ?>
+                <div class="card-body card-block">
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <input type="text" name="title" id="title" class="form-control" value="<?= h($post->title) ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Body</label>
+                        <textarea name="body" id="editor1" ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Image</label>
+                        <input type="file" name="myFile" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Published</label>
+                        <select name="published" >
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Save</button>
+                </div>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
+</div><!-- .animated -->

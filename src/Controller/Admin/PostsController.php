@@ -59,16 +59,39 @@ class PostsController extends AppController
     {
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
-            $post = $this->Posts->patchEntity($post, $this->request->getData());
-            if ($this->Posts->save($post)) {
-                $this->Flash->success(__('The post has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+            $allowed =  array('gif','png' ,'jpg','jpeg');
+            $fileName = $this->request->data['myFile']['name'];
+            $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+            $uploadPath = WWW_ROOT.'uploads/';
+            $uploadFile = $uploadPath.$fileName;
+            // Check if file is upload and file is match with extension requirement
+            if( !empty($this->request->data['myFile']['name']) && in_array($ext,$allowed) ){
+
+                if(move_uploaded_file($this->request->data['myFile']['tmp_name'],$uploadFile)){
+
+                    // Compress Image using Resmush API
+                    $compress = $this->Base->resmush($uploadFile);
+                    $content = file_get_contents($compress->dest);
+                    file_put_contents($uploadFile, $content);
+
+                    $post = $this->Posts->patchEntity($post, $this->request->getData());
+                    $post->image= $fileName;
+                    $post->user_id= $this->Auth->user('id');;
+                    if ($this->Posts->save($post)) {
+                        $this->Flash->success(__('The post has been saved.'));
+        
+                        return $this->redirect(['action' => 'index']);
+                    }
+                }else{
+                    $this->Flash->error(__("Could'nt Save Your Image."));
+                }
+            }else{
+                $this->Flash->error(__('Something Wrong With Your Image File.'));
             }
-            $this->Flash->error(__('The post could not be saved. Please, try again.'));
+            
         }
-        $users = $this->Posts->Users->find('list', ['limit' => 200]);
-        $this->set(compact('post', 'users'));
+        $this->set(compact('post'));
     }
 
     /**
@@ -83,17 +106,49 @@ class PostsController extends AppController
         $post = $this->Posts->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $post = $this->Posts->patchEntity($post, $this->request->getData());
-            if ($this->Posts->save($post)) {
-                $this->Flash->success(__('The post has been saved.'));
 
+        if ($this->request->is(['patch', 'post', 'put'])){
+
+
+            $fileName = $this->request->getData('image.name');
+            $oldData = $this->Posts->findById($id)->first();
+            $allowed =  array('gif','png' ,'jpg','jpeg');
+            $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+            $uploadPath = WWW_ROOT.'uploads/';
+            $uploadFile = $uploadPath.$fileName;
+            $post = $this->Posts->patchEntity($post, $this->request->getData());
+
+            // Check if new file is upload and file is match with extension requirement
+            if( !empty($fileName) && in_array($ext,$allowed) ){
+                // Arrange file path for delete old file and upload new file.
+                $path = WWW_ROOT."uploads\\".$oldData->image;
+                $file = new File($path,false, 0777);
+                $file->delete();
+
+                move_uploaded_file($this->request->data['myFile']['tmp_name'],$uploadFile);
+                $post->image= $fileName;
+
+            }elseif( empty($fileName) ){
+                $post->image= $oldData->image;
+            }else{
+                $this->Flash->error(__('Your Image File Extension is not supported'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The post could not be saved. Please, try again.'));
-        }
-        $users = $this->Posts->Users->find('list', ['limit' => 200]);
-        $this->set(compact('post', 'users'));
+   
+            if ($this->Posts->save($post)) {
+                
+                $this->Flash->success(__('The post has been Updated.'));
+                return $this->redirect(['action' => 'index']);
+
+            }else{
+
+                $this->Flash->error(__('The post could not be deleted. Please, try again.'));
+
+            }
+
+        }      
+        
+        $this->set(compact('post'));
     }
 
     /**

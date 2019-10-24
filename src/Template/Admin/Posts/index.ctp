@@ -22,6 +22,9 @@
                                     <td><?= h($post->title) ?></td>
                                     <td><?= $post->has('user') ? $this->Html->link($post->user->id, ['controller' => 'Users', 'action' => 'view', $post->user->id]) : '' ?></td>
                                     <td><?= h($post->created) ?></td>
+                                    <td><?= $this->Html->link(__('Edit'), ['action' => 'edit', $post->id]) ?>
+                                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $post->id], ['confirm' => __('Are you sure you want to delete # {0}?', $post->id)]) ?>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
