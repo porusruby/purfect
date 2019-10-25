@@ -20,6 +20,9 @@ $this->assign('title','Edit Post');
                         <input type="text" name="title" id="title" class="form-control" value="<?= h($post->title) ?>">
                     </div>
                     <div class="form-group">
+                        <?php echo $this->Form->control('category_id', ['options' => $category, 'empty' => 'Select Category','class'=>'form-control']); ?>
+                    </div>
+                    <div class="form-group">
                         <label for="">Body</label>
                         <textarea name="body" id="editor1" ><?= h($post->body) ?></textarea>
                     </div>

@@ -20,6 +20,9 @@ $this->assign('title','Add Posts')
                         <input type="text" name="title" id="title" class="form-control">
                     </div>
                     <div class="form-group">
+                        <?php echo $this->Form->control('category_id', ['options' => $category, 'empty' => 'Select Category','class'=>'form-control']); ?>
+                    </div>
+                    <div class="form-group">
                         <label for="">Body</label>
                         <textarea name="body" id="editor1" ></textarea>
                     </div>

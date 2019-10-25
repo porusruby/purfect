@@ -44,6 +44,10 @@ class PostsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->belongsTo('Categories', [
+            'foreignKey' => 'category_id'
+        ]);
     }
 
     /**
@@ -63,6 +67,11 @@ class PostsTable extends Table
             ->maxLength('title', 200)
             ->requirePresence('title', 'create')
             ->notEmptyString('title');
+
+        $validator
+            ->scalar('category_id')
+            ->requirePresence('category_id', 'create')
+            ->notEmptyString('category_id');
 
         $validator
             ->scalar('body')

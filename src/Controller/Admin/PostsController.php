@@ -91,7 +91,8 @@ class PostsController extends AppController
             }
             
         }
-        $this->set(compact('post'));
+        $category = $this->Posts->Categories->find('list', ['limit' => 20]);
+        $this->set(compact('post','category'));
     }
 
     /**
@@ -152,8 +153,8 @@ class PostsController extends AppController
             }
 
         }      
-        
-        $this->set(compact('post'));
+        $category = $this->Posts->Categories->find('list', ['limit' => 20]);
+        $this->set(compact('post','category'));
     }
 
     /**
