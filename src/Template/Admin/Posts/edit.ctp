@@ -3,23 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Post $post
  */
+$this->assign('title','Edit Post');
 ?>
-<div class="posts form large-9 medium-8 columns content">
-    <?= $this->Form->create($post) ?>
-    <fieldset>
-        <legend><?= __('Edit Post') ?></legend>
-        <?php
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('title');
-            echo $this->Form->control('body');
-            echo $this->Form->control('published');
-            echo $this->Form->control('image');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
-
+<a class="btn btn-warning" href="<?php echo $this->Url->build('/admin/posts', true); ?>"><i class="fa fa-arrow-left"></i> Back</a>
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-md-12">
@@ -35,18 +21,19 @@
                     </div>
                     <div class="form-group">
                         <label for="">Body</label>
-                        <textarea name="body" id="editor1" ></textarea>
+                        <textarea name="body" id="editor1" ><?= h($post->body) ?></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="">Image</label>
+                        <label for="">Image</label><br>
+                        <img src="<?php echo $this->Url->image("/uploads/").$post->image ?>" style="max-height:200px">
                         <input type="file" name="myFile" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="">Published</label>
-                        <select name="published" >
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
+                        <div class="text-left">
+                        <?php echo $this->Form->control('published',['class'=>'form-control','label'=>false,'style'=>'width:5%']) ?>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="card-footer">

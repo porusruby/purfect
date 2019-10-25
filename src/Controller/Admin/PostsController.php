@@ -110,7 +110,7 @@ class PostsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])){
 
 
-            $fileName = $this->request->getData('image.name');
+            $fileName = $this->request->getData('myFile.name');
             $oldData = $this->Posts->findById($id)->first();
             $allowed =  array('gif','png' ,'jpg','jpeg');
             $ext = pathinfo($fileName, PATHINFO_EXTENSION);
@@ -118,7 +118,7 @@ class PostsController extends AppController
             $uploadFile = $uploadPath.$fileName;
             $post = $this->Posts->patchEntity($post, $this->request->getData());
 
-            // Check if new file is upload and file is match with extension requirement
+            // Check if (new file is upload) and (file is match with extension requirement)
             if( !empty($fileName) && in_array($ext,$allowed) ){
                 // Arrange file path for delete old file and upload new file.
                 $path = WWW_ROOT."uploads\\".$oldData->image;
@@ -126,6 +126,11 @@ class PostsController extends AppController
                 $file->delete();
 
                 move_uploaded_file($this->request->data['myFile']['tmp_name'],$uploadFile);
+                // Compress Image using Resmush API
+                $compress = $this->Base->resmush($uploadFile);
+                $content = file_get_contents($compress->dest);
+                file_put_contents($uploadFile, $content);
+
                 $post->image= $fileName;
 
             }elseif( empty($fileName) ){
@@ -162,10 +167,19 @@ class PostsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $post = $this->Posts->get($id);
-        if ($this->Posts->delete($post)) {
-            $this->Flash->success(__('The post has been deleted.'));
-        } else {
-            $this->Flash->error(__('The post could not be deleted. Please, try again.'));
+
+        // Arrange file path for delete file.
+        $path = WWW_ROOT."uploads\\".$post->image;
+        $file = new File($path,false, 0777);
+
+        if($file->delete()){ //Check file is deleted or not.
+            if ($this->Posts->delete($post)) {
+                $this->Flash->success(__('The post has been deleted.'));
+            } else {
+                $this->Flash->error(__('The post could not be deleted. Please, try again.'));
+            }
+        }else{
+            $this->Flash->error(__("There's something wrong with the image file."));
         }
 
         return $this->redirect(['action' => 'index']);

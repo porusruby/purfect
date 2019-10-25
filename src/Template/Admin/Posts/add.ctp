@@ -5,6 +5,7 @@
  */
 $this->assign('title','Add Posts')
 ?>
+<a class="btn btn-warning" href="<?php echo $this->Url->build('/admin/posts', true); ?>"><i class="fa fa-arrow-left"></i> Back</a>
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-md-12">
@@ -28,10 +29,9 @@ $this->assign('title','Add Posts')
                     </div>
                     <div class="form-group">
                         <label for="">Published</label>
-                        <select name="published" >
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
+                        <div class="text-left">
+                        <?php echo $this->Form->control('published',['class'=>'form-control','label'=>false,'style'=>'width:5%']) ?>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
