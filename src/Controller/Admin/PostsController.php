@@ -106,7 +106,7 @@ class PostsController extends AppController
     public function edit($id = null)
     {
         $post = $this->Posts->get($id, [
-            'contain' => []
+            'contain' => ['Tags']
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])){
@@ -153,9 +153,10 @@ class PostsController extends AppController
 
             }
 
-        }      
+        }
+        $tags = $this->Posts->Tags->find('list');      
         $category = $this->Posts->Categories->find('list', ['limit' => 20]);
-        $this->set(compact('post','category'));
+        $this->set(compact('post','category','tags'));
     }
 
     /**

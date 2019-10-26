@@ -49,7 +49,11 @@ class PostsTable extends Table
             'foreignKey' => 'category_id'
         ]);
 
-        $this->belongsToMany('Tags');
+        $this->belongsToMany('Tags', [
+            'foreignKey' => 'post_id',
+            'targetForeignKey' => 'tag_id',
+            'joinTable' => 'posts_tags'
+        ]);
     }
 
     /**

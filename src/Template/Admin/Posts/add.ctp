@@ -23,7 +23,7 @@ $this->assign('title','Add Posts')
                         <?php echo $this->Form->control('category_id', ['options' => $category, 'empty' => 'Select Category','class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
-                        <?php echo $this->Form->control('tags._ids', ['options' => $tags]); ?>
+                        <?php echo $this->Form->control('tags._ids', ['options' => $tags, 'empty' => '','class'=>'standardSelect','data-placeholder'=>'Select Tag...','multiple']); ?>
                     </div>
                     <div class="form-group">
                         <label for="">Body</label>
