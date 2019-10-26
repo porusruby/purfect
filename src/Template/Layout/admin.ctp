@@ -27,7 +27,7 @@
     <?=  $this->Html->css('/backend/vendors/bootstrap/dist/css/bootstrap.min.css'); ?>
     <?=  $this->Html->css('/backend/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>
     <?=  $this->Html->css('/backend/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css'); ?>
-
+    <?=  $this->Html->css('/backend/vendors/chosen/chosen.min.css'); ?>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 
@@ -111,6 +111,7 @@
     <?=  $this->Html->script('/backend/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js'); ?>
     <?=  $this->Html->script('/backend/vendors/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>
     <?=  $this->Html->script('/backend/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'); ?>
+    <?=  $this->Html->script('/backend/vendors/chosen/chosen.jquery.min.js'); ?>
     <!--
     <script src="vendors/jszip/dist/jszip.min.js"></script>
     <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
@@ -169,6 +170,15 @@
 		} );
 
     })(jQuery);
+    </script>
+    <script>
+    jQuery(document).ready(function() {
+        jQuery(".standardSelect").chosen({
+            disable_search_threshold: 10,
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+        });
+    });
     </script>
 
 </body>

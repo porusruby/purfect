@@ -31,6 +31,7 @@ class Post extends Entity
     protected $_accessible = [
         'user_id' => true,
         'category_id'=>true,
+        'tag_id'=>true,
         'title' => true,
         'body' => true,
         'published' => true,

@@ -23,6 +23,9 @@ $this->assign('title','Add Posts')
                         <?php echo $this->Form->control('category_id', ['options' => $category, 'empty' => 'Select Category','class'=>'form-control']); ?>
                     </div>
                     <div class="form-group">
+                        <?php echo $this->Form->control('tags._ids', ['options' => $tags]); ?>
+                    </div>
+                    <div class="form-group">
                         <label for="">Body</label>
                         <textarea name="body" id="editor1" ></textarea>
                     </div>

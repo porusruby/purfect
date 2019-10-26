@@ -48,6 +48,8 @@ class PostsTable extends Table
         $this->belongsTo('Categories', [
             'foreignKey' => 'category_id'
         ]);
+
+        $this->belongsToMany('Tags');
     }
 
     /**

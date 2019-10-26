@@ -91,8 +91,9 @@ class PostsController extends AppController
             }
             
         }
+        $tags = $this->Posts->Tags->find('list');
         $category = $this->Posts->Categories->find('list', ['limit' => 20]);
-        $this->set(compact('post','category'));
+        $this->set(compact('post','category','tags'));
     }
 
     /**
