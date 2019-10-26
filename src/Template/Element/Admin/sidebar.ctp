@@ -22,8 +22,8 @@
                             <li><i class="fa fa-tags"></i><a href="<?php echo $this->Url->build('/admin/tags', true); ?>">Tags</a></li>
                         </ul>
                     </li>
-                    <li class="<?php echo ($this->request->getParam('controller') == 'Home' )?'active' :'' ?>">
-                        <a href="index.html"> <i class="menu-icon fa fa-image"></i>Media </a>
+                    <li class="<?php echo ($this->request->getParam('controller') == 'Users' )?'active' :'' ?>">
+                        <a href="<?php echo $this->Url->build('/admin/users/filemanager', true); ?>"> <i class="menu-icon fa fa-image"></i>Media </a>
                     </li>
                     <li class="<?php echo ($this->request->getParam('controller') == 'Home' )?'active' :'' ?>">
                         <a href="index.html"> <i class="menu-icon fa fa-file-text-o"></i>Pages </a>
