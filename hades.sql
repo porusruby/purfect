@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2019 at 11:45 AM
+-- Generation Time: Oct 26, 2019 at 08:05 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -64,13 +64,6 @@ CREATE TABLE `posts` (
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `user_id`, `category_id`, `title`, `body`, `published`, `image`, `created`, `modified`) VALUES
-(15, 5, 4, 'Cake PHP Rapid Development', '<p>adssadasd</p>\r\n', 0, 'smaragdine.png', '2019-10-25 09:41:49', '2019-10-25 09:43:36');
-
 -- --------------------------------------------------------
 
 --
@@ -94,6 +87,18 @@ CREATE TABLE `tags` (
   `slug` varchar(400) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `slug`, `description`) VALUES
+(1, 'metalcore', 'metalcore', 'dadas'),
+(2, 'grindcore', 'grindcore', 'dsadsa'),
+(3, 'slam', 'slam', 'da'),
+(4, 'trash', 'trash', 'cc'),
+(5, 'heavy', 'heavy', 'dd'),
+(6, 'djent', 'djent', 'da');
 
 -- --------------------------------------------------------
 
@@ -143,7 +148,8 @@ ALTER TABLE `posts`
 -- Indexes for table `posts_tags`
 --
 ALTER TABLE `posts_tags`
-  ADD KEY `post_id` (`post_id`,`tag_id`);
+  ADD PRIMARY KEY (`post_id`,`tag_id`),
+  ADD KEY `tag_key` (`tag_id`);
 
 --
 -- Indexes for table `tags`
@@ -171,19 +177,30 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `posts_tags`
+--
+ALTER TABLE `posts_tags`
+  ADD CONSTRAINT `post_key` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  ADD CONSTRAINT `tag_key` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
