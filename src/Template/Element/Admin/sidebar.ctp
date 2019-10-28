@@ -25,10 +25,10 @@
                     <li class="<?php echo ($this->request->getParam('controller') == 'Users' )?'active' :'' ?>">
                         <a href="<?php echo $this->Url->build('/admin/users/filemanager', true); ?>"> <i class="menu-icon fa fa-image"></i>Media </a>
                     </li>
-                    <li class="<?php echo ($this->request->getParam('controller') == 'Home' )?'active' :'' ?>">
-                        <a href="index.html"> <i class="menu-icon fa fa-file-text-o"></i>Pages </a>
+                    <li class="<?php echo ($this->request->getParam('controller') == 'Pages' )?'active' :'' ?>">
+                        <a href="<?php echo $this->Url->build('/admin/pages', true); ?>"> <i class="menu-icon fa fa-file-text-o"></i>Pages </a>
                     </li>
-                    <li class="<?php echo ($this->request->getParam('controller') == 'Home' )?'active' :'' ?>">
+                    <li class="<?php echo ($this->request->getParam('controller') == 'Comments' )?'active' :'' ?>">
                         <a href="index.html"> <i class="menu-icon fa fa-comments"></i>Comments </a>
                     </li>
 
