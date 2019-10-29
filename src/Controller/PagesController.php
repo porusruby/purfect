@@ -60,9 +60,25 @@ class PagesController extends AppController
 
         try {
             $this->loadModel('Posts');
-            $posts = $this->Posts->find('all');
-            $this->set(compact('posts'));
-            $this->render(implode('/', $path));
+            $this->loadModel('Pages');
+            /**
+             * 
+             * Displays a view & data based on page
+             *
+             */
+            if($path != 'home')
+            {
+                $posts = $this->Posts->find('all');
+                $page  = $this->Pages->findBySlug($path[0])->firstOrFail();
+                $this->set(compact('posts','page'));
+                $this->render('/Pages/page');
+            }else{
+                $posts = $this->Posts->find('all');
+                $this->set(compact('posts'));
+                $this->render(implode('/', $path));
+            }
+            
+            
         } catch (MissingTemplateException $exception) {
             if (Configure::read('debug')) {
                 throw $exception;
