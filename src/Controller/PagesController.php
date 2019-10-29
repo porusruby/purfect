@@ -42,10 +42,16 @@ class PagesController extends AppController
     {
         $count = count($path);
         if (!$count) {
-            return $this->redirect('/');
+            $this->loadModel('Posts');
+            $posts = $this->Posts->find('list');
+            $this->set(compact('posts'));
+            //$this->render('Pages/home');
+            //return $this->redirect('/');
         }
         if (in_array('..', $path, true) || in_array('.', $path, true)) {
             throw new ForbiddenException();
+            //return $this->redirect('/');
+            
         }
         $page = $subpage = null;
 
@@ -58,6 +64,7 @@ class PagesController extends AppController
         $this->set(compact('page', 'subpage'));
 
         try {
+            if($path == '')
             $this->render(implode('/', $path));
         } catch (MissingTemplateException $exception) {
             if (Configure::read('debug')) {
@@ -66,4 +73,7 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+
+
 }

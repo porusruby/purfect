@@ -1,276 +1,132 @@
-<?php
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
-use Cake\Cache\Cache;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Datasource\ConnectionManager;
-use Cake\Error\Debugger;
-use Cake\Http\Exception\NotFoundException;
-
-$this->layout = false;
-
-if (!Configure::read('debug')) :
-    throw new NotFoundException(
-        'Please replace src/Template/Pages/home.ctp with your own version or re-enable debug mode.'
-    );
-endif;
-
-$cakeDescription = 'CakePHP: the rapid development PHP framework';
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>
-    </title>
-
-    <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
-    <?= $this->Html->css('home.css') ?>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:500i|Roboto:300,400,700|Roboto+Mono" rel="stylesheet">
-</head>
-<body class="home">
-
-<header class="row">
-    <div class="header-image"><?= $this->Html->image('cake.logo.svg') ?></div>
-    <div class="header-title">
-        <h1>Welcome to CakePHP <?= Configure::version() ?> Red Velvet. Build fast. Grow solid.</h1>
-    </div>
-</header>
-
-<div class="row">
-    <div class="columns large-12">
-        <div class="ctp-warning alert text-center">
-            <p>Please be aware that this page will not be shown if you turn off debug mode unless you replace src/Template/Pages/home.ctp with your own version.</p>
+   <!-- ################################################################################################ -->
+   <div class="wrapper bgded" style="background-image:url('<?php echo $this->Url->image('/uploads/bg.jpg'); ?>');">
+        <div id="pageintro" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <article>
+                <div class="overlay inspace-30 btmspace-30">
+                    <h2 class="heading">Phasellus elementum sem</h2>
+                    <p>Eget euismod dui ultricies eget nec ornare enim vivamus volutpat vehicula massa quis ut euismod eget orci ac molestie integer porttitor laoreet vestibulum sed id metus hendrerit euismod.</p>
+                </div>
+                <footer>
+                    <ul class="nospace inline pushright">
+                        <li><a class="btn" href="#">Vestibulum</a></li>
+                        <li><a class="btn inverse" href="#">Aliquam</a></li>
+                    </ul>
+                </footer>
+            </article>
+            <!-- ################################################################################################ -->
         </div>
-        <div id="url-rewriting-warning" class="alert url-rewriting">
-            <ul>
-                <li class="bullet problem">
-                    URL rewriting is not properly configured on your server.<br />
-                    1) <a target="_blank" href="https://book.cakephp.org/3.0/en/installation.html#url-rewriting">Help me configure it</a><br />
-                    2) <a target="_blank" href="https://book.cakephp.org/3.0/en/development/configuration.html#general-configuration">I don't / can't use URL rewriting</a>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper row3">
+        <main class="hoc container clear">
+            <!-- main body -->
+            <!-- ################################################################################################ -->
+            <div class="center btmspace-50">
+                <h2 class="heading">Justo non pulvinar</h2>
+                <p>Elit nullam facilisis est quis justo viverra hendrerit donec euismod fringilla justo a auctor.</p>
+            </div>
+            <article class="one_third first btmspace-50">
+                <h3 class="font-x1 btmspace-30"><i class="fa fa-2x fa-500px rightspace-10"></i> <a href="#">Aliquam in lacus</a></h3>
+                <p>Bibendum et vestibulum condimentum rutrum arcu sed posuere sem in eu lectus sit amet dolor ultrices suscipit aliquam vestibulum sollicitudin dapibus&hellip;</p>
+            </article>
+            <article class="one_third btmspace-50">
+                <h3 class="font-x1 btmspace-30"><i class="fa fa-2x fa-adjust rightspace-10"></i> <a href="#">Vel velit malesuada</a></h3>
+                <p>Nunc enim sapien elementum ac aliquam in tempus a tortor vivamus at arcu ut tellus fermentum rutrum a eu orci vestibulum ante ipsum primis in faucibus&hellip;</p>
+            </article>
+            <article class="one_third btmspace-50">
+                <h3 class="font-x1 btmspace-30"><i class="fa fa-2x fa-leaf rightspace-10"></i> <a href="#">Gravida nec non</a></h3>
+                <p>Ultrices posuere cubilia curae nam placerat neque eu elit eleifend gravida ut efficitur lacus et ex ullamcorper eget molestie massa lacinia donec euismod&hellip;</p>
+            </article>
+            <article class="one_third first">
+                <h3 class="font-x1 btmspace-30"><i class="fa fa-2x fa-leanpub rightspace-10"></i> <a href="#">Mauris nam mollis</a></h3>
+                <p>Amet nunc feugiat sed volutpat odio mollis duis tellus ante mollis non tellus sit amet facilisis interdum quam morbi imperdiet tincidunt leo ac eleifend&hellip;</p>
+            </article>
+            <article class="one_third">
+                <h3 class="font-x1 btmspace-30"><i class="fa fa-2x fa-legal rightspace-10"></i> <a href="#">Mauris dui sed</a></h3>
+                <p>Elementum mattis vulputate ut euismod vitae nibh nam nulla sapien vehicula nec erat ut sodales tincidunt magna curabitur commodo leo eu felis rhoncus&hellip;</p>
+            </article>
+            <article class="one_third">
+                <h3 class="font-x1 btmspace-30"><i class="fa fa-2x fa-pied-piper-alt rightspace-10"></i> <a href="#">Vestibulum odio</a></h3>
+                <p>Elit nisi tincidunt bibendum lectus condimentum non etiam pulvinar erat et tristique tempor nisi lectus ultricies sapien bibendum interdum sapien&hellip;</p>
+            </article>
+            <!-- ################################################################################################ -->
+            <!-- / main body -->
+            <div class="clear"></div>
+        </main>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/02.png');">
+        <div class="hoc container clear">
+            <!-- ################################################################################################ -->
+            <article class="center">
+                <h2 class="font-x3 uppercase">Lacus ligula malesuada</h2>
+                <p class="btmspace-50">Ac egestas at justo quisque lobortis ipsum sapien sed lacinia libero</p>
+                <footer>
+                    <ul class="nospace inline pushright">
+                        <li><a class="btn inverse" href="#">Convallis</a></li>
+                        <li><a class="btn" href="#">Vestibulum</a></li>
+                    </ul>
+                </footer>
+            </article>
+            <!-- ################################################################################################ -->
+        </div>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper row3">
+        <section class="hoc container clear">
+            <!-- ################################################################################################ -->
+            <div class="center btmspace-50">
+                <h2 class="heading">Pretium nec nunc tincidunt</h2>
+                <p>Neque nisl id dictum nisi lacinia vel proin at dolor elit morbi sagittis turpis dolor.</p>
+            </div>
+            <ul class="nospace group">
+                <li class="one_third first">
+                    <article class="element">
+                        <figure><img src="images/demo/320x210.png" alt="">
+                            <figcaption><a href="#"><i class="fa fa-eye"></i></a></figcaption>
+                        </figure>
+                        <div class="excerpt">
+                            <h6 class="heading">Congue dolor venenatis</h6>
+                            <time datetime="2045-04-05">5<sup>th</sup> April 2045</time>
+                            <p>Id donec feugiat placerat enim facilisis maximus leo pellentesque vitae&hellip;</p>
+                            <footer><a href="#">Read More &raquo;</a></footer>
+                        </div>
+                    </article>
+                </li>
+                <li class="one_third">
+                    <article class="element">
+                        <figure><img src="images/demo/320x210.png" alt="">
+                            <figcaption><a href="#"><i class="fa fa-eye"></i></a></figcaption>
+                        </figure>
+                        <div class="excerpt">
+                            <h6 class="heading">Tincidunt lectus ex</h6>
+                            <time datetime="2045-04-05">5<sup>th</sup> April 2045</time>
+                            <p>Vel sagittis dui gravida sit amet morbi porttitor sed neque a porta&hellip;</p>
+                            <footer><a href="#">Read More &raquo;</a></footer>
+                        </div>
+                    </article>
+                </li>
+                <li class="one_third">
+                    <article class="element">
+                        <figure><img src="images/demo/320x210.png" alt="">
+                            <figcaption><a href="#"><i class="fa fa-eye"></i></a></figcaption>
+                        </figure>
+                        <div class="excerpt">
+                            <h6 class="heading">Convallis venenatis</h6>
+                            <time datetime="2045-04-05">5<sup>th</sup> April 2045</time>
+                            <p>Ut pellentesque lacus vel dapibus fermentum odio commodo&hellip;</p>
+                            <footer><a href="#">Read More &raquo;</a></footer>
+                        </div>
+                    </article>
                 </li>
             </ul>
-        </div>
-        <?php Debugger::checkSecurityKeys(); ?>
+            <!-- ################################################################################################ -->
+        </section>
     </div>
-</div>
-
-<div class="row">
-    <div class="columns large-6">
-        <h4>Environment</h4>
-        <ul>
-        <?php if (version_compare(PHP_VERSION, '5.6.0', '>=')) : ?>
-            <li class="bullet success">Your version of PHP is 5.6.0 or higher (detected <?= PHP_VERSION ?>).</li>
-        <?php else : ?>
-            <li class="bullet problem">Your version of PHP is too low. You need PHP 5.6.0 or higher to use CakePHP (detected <?= PHP_VERSION ?>).</li>
-        <?php endif; ?>
-
-        <?php if (extension_loaded('mbstring')) : ?>
-            <li class="bullet success">Your version of PHP has the mbstring extension loaded.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your version of PHP does NOT have the mbstring extension loaded.</li>
-        <?php endif; ?>
-
-        <?php if (extension_loaded('openssl')) : ?>
-            <li class="bullet success">Your version of PHP has the openssl extension loaded.</li>
-        <?php elseif (extension_loaded('mcrypt')) : ?>
-            <li class="bullet success">Your version of PHP has the mcrypt extension loaded.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your version of PHP does NOT have the openssl or mcrypt extension loaded.</li>
-        <?php endif; ?>
-
-        <?php if (extension_loaded('intl')) : ?>
-            <li class="bullet success">Your version of PHP has the intl extension loaded.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your version of PHP does NOT have the intl extension loaded.</li>
-        <?php endif; ?>
-        </ul>
-    </div>
-    <div class="columns large-6">
-        <h4>Filesystem</h4>
-        <ul>
-        <?php if (is_writable(TMP)) : ?>
-            <li class="bullet success">Your tmp directory is writable.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your tmp directory is NOT writable.</li>
-        <?php endif; ?>
-
-        <?php if (is_writable(LOGS)) : ?>
-            <li class="bullet success">Your logs directory is writable.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your logs directory is NOT writable.</li>
-        <?php endif; ?>
-
-        <?php $settings = Cache::getConfig('_cake_core_'); ?>
-        <?php if (!empty($settings)) : ?>
-            <li class="bullet success">The <em><?= $settings['className'] ?>Engine</em> is being used for core caching. To change the config edit config/app.php</li>
-        <?php else : ?>
-            <li class="bullet problem">Your cache is NOT working. Please check the settings in config/app.php</li>
-        <?php endif; ?>
-        </ul>
-    </div>
-    <hr />
-</div>
-
-<div class="row">
-    <div class="columns large-6">
-        <h4>Database</h4>
-        <?php
-        try {
-            $connection = ConnectionManager::get('default');
-            $connected = $connection->connect();
-        } catch (Exception $connectionError) {
-            $connected = false;
-            $errorMsg = $connectionError->getMessage();
-            if (method_exists($connectionError, 'getAttributes')) :
-                $attributes = $connectionError->getAttributes();
-                if (isset($errorMsg['message'])) :
-                    $errorMsg .= '<br />' . $attributes['message'];
-                endif;
-            endif;
-        }
-        ?>
-        <ul>
-        <?php if ($connected) : ?>
-            <li class="bullet success">CakePHP is able to connect to the database.</li>
-        <?php else : ?>
-            <li class="bullet problem">CakePHP is NOT able to connect to the database.<br /><?= $errorMsg ?></li>
-        <?php endif; ?>
-        </ul>
-    </div>
-    <div class="columns large-6">
-        <h4>DebugKit</h4>
-        <ul>
-        <?php if (Plugin::isLoaded('DebugKit')) : ?>
-            <li class="bullet success">DebugKit is loaded.</li>
-        <?php else : ?>
-            <li class="bullet problem">DebugKit is NOT loaded. You need to either install pdo_sqlite, or define the "debug_kit" connection name.</li>
-        <?php endif; ?>
-        </ul>
-    </div>
-    <hr />
-</div>
-
-<div class="row">
-    <div class="columns large-6">
-        <h3>Editing this Page</h3>
-        <ul>
-            <li class="bullet cutlery">To change the content of this page, edit: src/Template/Pages/home.ctp.</li>
-            <li class="bullet cutlery">You can also add some CSS styles for your pages at: webroot/css/.</li>
-        </ul>
-    </div>
-    <div class="columns large-6">
-        <h3>Getting Started</h3>
-        <ul>
-            <li class="bullet book"><a target="_blank" href="https://book.cakephp.org/3.0/en/">CakePHP 3.0 Docs</a></li>
-            <li class="bullet book"><a target="_blank" href="https://book.cakephp.org/3.0/en/tutorials-and-examples/cms/installation.html">The 20 min CMS Tutorial</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="row">
-    <div class="columns large-12 text-center">
-        <h3 class="more">More about Cake</h3>
-        <p>
-            CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Front Controller and MVC.<br />
-            Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
-        </p>
-    </div>
-    <hr/>
-</div>
-
-<div class="row">
-    <div class="columns large-4">
-        <i class="icon support">P</i>
-        <h3>Help and Bug Reports</h3>
-        <ul>
-            <li class="bullet cutlery">
-                <a href="irc://irc.freenode.net/cakephp">irc.freenode.net #cakephp</a>
-                <ul><li>Live chat about CakePHP</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="http://cakesf.herokuapp.com/">Slack</a>
-                <ul><li>CakePHP Slack support</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://github.com/cakephp/cakephp/issues">CakePHP Issues</a>
-                <ul><li>CakePHP issues and pull requests</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="http://discourse.cakephp.org/">CakePHP Forum</a>
-                <ul><li>CakePHP official discussion forum</li></ul>
-            </li>
-        </ul>
-    </div>
-    <div class="columns large-4">
-        <i class="icon docs">r</i>
-        <h3>Docs and Downloads</h3>
-        <ul>
-            <li class="bullet cutlery">
-                <a href="https://api.cakephp.org/3.0/">CakePHP API</a>
-                <ul><li>Quick Reference</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://book.cakephp.org/3.0/en/">CakePHP Documentation</a>
-                <ul><li>Your Rapid Development Cookbook</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://bakery.cakephp.org">The Bakery</a>
-                <ul><li>Everything CakePHP</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://plugins.cakephp.org">CakePHP plugins repo</a>
-                <ul><li>A comprehensive list of all CakePHP plugins created by the community</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://github.com/cakephp/">CakePHP Code</a>
-                <ul><li>For the Development of CakePHP Git repository, Downloads</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://github.com/FriendsOfCake/awesome-cakephp">CakePHP Awesome List</a>
-                <ul><li>A curated list of amazingly awesome CakePHP plugins, resources and shiny things.</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://www.cakephp.org">CakePHP</a>
-                <ul><li>The Rapid Development Framework</li></ul>
-            </li>
-        </ul>
-    </div>
-    <div class="columns large-4">
-        <i class="icon training">s</i>
-        <h3>Training and Certification</h3>
-        <ul>
-            <li class="bullet cutlery">
-                <a href="https://cakefoundation.org/">Cake Software Foundation</a>
-                <ul><li>Promoting development related to CakePHP</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://training.cakephp.org/">CakePHP Training</a>
-                <ul><li>Learn to use the CakePHP framework</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://certification.cakephp.org/">CakePHP Certification</a>
-                <ul><li>Become a certified CakePHP developer</li></ul>
-            </li>
-        </ul>
-    </div>
-</div>
-
-</body>
-</html>
