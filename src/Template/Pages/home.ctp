@@ -87,45 +87,21 @@
                 <p>Neque nisl id dictum nisi lacinia vel proin at dolor elit morbi sagittis turpis dolor.</p>
             </div>
             <ul class="nospace group">
-                <li class="one_third first">
+                <?php $no=1;foreach($posts as $row) : ?>
+                <li class="one_third <?php echo ($no == 1)?'first':''  ?>">
                     <article class="element">
                         <figure><img src="images/demo/320x210.png" alt="">
                             <figcaption><a href="#"><i class="fa fa-eye"></i></a></figcaption>
                         </figure>
                         <div class="excerpt">
-                            <h6 class="heading">Congue dolor venenatis</h6>
+                            <h6 class="heading"><?= h($row->title) ?></h6>
                             <time datetime="2045-04-05">5<sup>th</sup> April 2045</time>
                             <p>Id donec feugiat placerat enim facilisis maximus leo pellentesque vitae&hellip;</p>
                             <footer><a href="#">Read More &raquo;</a></footer>
                         </div>
                     </article>
                 </li>
-                <li class="one_third">
-                    <article class="element">
-                        <figure><img src="images/demo/320x210.png" alt="">
-                            <figcaption><a href="#"><i class="fa fa-eye"></i></a></figcaption>
-                        </figure>
-                        <div class="excerpt">
-                            <h6 class="heading">Tincidunt lectus ex</h6>
-                            <time datetime="2045-04-05">5<sup>th</sup> April 2045</time>
-                            <p>Vel sagittis dui gravida sit amet morbi porttitor sed neque a porta&hellip;</p>
-                            <footer><a href="#">Read More &raquo;</a></footer>
-                        </div>
-                    </article>
-                </li>
-                <li class="one_third">
-                    <article class="element">
-                        <figure><img src="images/demo/320x210.png" alt="">
-                            <figcaption><a href="#"><i class="fa fa-eye"></i></a></figcaption>
-                        </figure>
-                        <div class="excerpt">
-                            <h6 class="heading">Convallis venenatis</h6>
-                            <time datetime="2045-04-05">5<sup>th</sup> April 2045</time>
-                            <p>Ut pellentesque lacus vel dapibus fermentum odio commodo&hellip;</p>
-                            <footer><a href="#">Read More &raquo;</a></footer>
-                        </div>
-                    </article>
-                </li>
+                <?php $no++;endforeach ?>
             </ul>
             <!-- ################################################################################################ -->
         </section>
