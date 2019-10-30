@@ -63,10 +63,9 @@
                 <li><a href="#">Portfolios</a></li>
                 <li><a class="drop" href="#">Blogs</a>
                     <ul>
-                        <li><a href="pages/gallery.html">CakePHP</a></li>
-                        <li><a href="pages/full-width.html">Flutter</a></li>
-                        <li><a href="pages/sidebar-left.html">Laravel</a></li>
-                        <li><a href="pages/sidebar-right.html">Other</a></li>
+                    <?php foreach($categories as $row) : ?>
+                        <li><a href="<?php echo $this->Url->build("/category/".$row->slug, true); ?>"><?= h($row->name)  ?></a></li>
+                    <?php endforeach; ?>
                     </ul>
                 </li>
                 <li><a href="#">About Us</a></li>
