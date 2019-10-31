@@ -3,7 +3,11 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
-
+use Cake\Filesystem\File; // Load Class File for delete file
+//Load Library Initial Avatar
+require_once(ROOT . DS  . 'vendor' . DS  . 'lasserafn' . DS . 'php-initial-avatar-generator' . DS . 'src' . DS . 'InitialAvatar.php' );
+use LasseRafn\InitialAvatarGenerator\InitialAvatar;
+use Cake\Utility\Text;
 /**
  * Users Controller
  *
@@ -13,6 +17,12 @@ use Cake\Event\Event;
  */
 class UsersController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Base');
+        $this->viewBuilder()->setLayout('admin');
+    }
     /**
      * Index method
      *
@@ -20,7 +30,8 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = $this->paginate($this->Users);
+        //$users = $this->paginate($this->Users);
+        $users = $this->Users->find('all')->where(['Users.id !=' => '5']);
 
         $this->set(compact('users'));
     }
@@ -36,6 +47,58 @@ class UsersController extends AppController
         $this->Auth->allow(['add','logout']);
     }
 
+    public function setting()
+    {
+        $id   = $this->Auth->user('id');
+        $user = $this->Users->findById($id)->first();
+
+        if ($this->request->is(['patch', 'post', 'put'])){
+            $fileName = $this->request->getData('myFile.name');
+            $oldData = $this->Users->findById($id)->first();
+            $allowed =  array('gif','png' ,'jpg','jpeg');
+            $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+            $uploadPath = WWW_ROOT.'uploads/';
+            $uploadFile = $uploadPath.$fileName;
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+
+            // Check if (new file is upload) and (file is match with extension requirement)
+            if( !empty($fileName) && in_array($ext,$allowed) ){
+                // Arrange file path for delete old file and upload new file.
+                $path = WWW_ROOT."uploads\\".$oldData->avatar;
+                $file = new File($path,false, 0777);
+                $file->delete();
+
+                move_uploaded_file($this->request->data['myFile']['tmp_name'],$uploadFile);
+                // Compress Image using Resmush API
+                $compress = $this->Base->resmush($uploadFile);
+                $content = file_get_contents($compress->dest);
+                file_put_contents($uploadFile, $content);
+
+                $user->avatar = $fileName;
+
+            }elseif( empty($fileName) ){
+                $user->avatar = $oldData->avatar;
+            }else{
+                $this->Flash->error(__('Your Image File Extension is not supported'));
+                return $this->redirect(['action' => 'setting']);
+            }
+   
+            if ($this->Users->save($user)) {
+                
+                $this->Flash->success(__('The post has been Updated.'));
+                return $this->redirect(['action' => 'setting']);
+
+            }else{
+
+                $this->Flash->error(__('The post could not be deleted. Please, try again.'));
+
+            }
+
+        }
+
+        $this->set(compact('user'));
+    }
+
     /**
      * View method
      *
@@ -46,7 +109,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Posts']
+            'contain' => ['Users']
         ]);
 
         $this->set('user', $user);
@@ -117,7 +180,8 @@ class UsersController extends AppController
     }
 
     public function login()
-    {
+    {   
+        $this->viewBuilder()->setLayout('login');
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -129,8 +193,11 @@ class UsersController extends AppController
     }
 
     public function logout()
-    {
-        return $this->redirect($this->Auth->logout());
+    {   
+        if($this->Auth->logout()){
+            return $this->redirect(['action' => 'index']);
+        }
+
     }
 
     public function filemanager()

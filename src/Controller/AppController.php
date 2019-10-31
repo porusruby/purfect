@@ -40,7 +40,7 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-
+        $this->viewBuilder()->setLayout('admin');
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
@@ -74,7 +74,14 @@ class AppController extends Controller
     }
     
     public function beforeFilter(Event $event)
-    {
+    {   
+        $id   = $this->Auth->user('id');
+        //$this->Users->find('all')->where(['Users.id !=' => '5']);
+        $logged = $this->Users->findById($id)->first();
+        $this->set(compact('logged'));
         $this->Auth->allow(['display']);
     }
+
+
+
 }

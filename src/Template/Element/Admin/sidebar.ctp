@@ -31,24 +31,21 @@
                     <li class="<?php echo ($this->request->getParam('controller') == 'Comments' )?'active' :'' ?>">
                         <a href="index.html"> <i class="menu-icon fa fa-comments"></i>Comments </a>
                     </li>
+                    <li class="<?php echo ($this->request->getParam('controller') == 'Tasks' )?'active' :'' ?>">
+                        <a href="<?php echo $this->Url->build('/admin/tasks', true); ?>"> <i class="menu-icon fa fa-drupal"></i>Tasks </a>
+                    </li>
+
 
                     <h3 class="menu-title">Settings</h3><!-- /.menu-title -->
 
-                    <li class="<?php echo ($this->request->getParam('controller') == 'Home' )?'active' :'' ?>">
-                        <a href="index.html"> <i class="menu-icon fa fa-user"></i>Users </a>
+                    <li class="<?php echo ($this->request->getParam('controller') == 'Users' )?'active' :'' ?>">
+                        <a href="<?php echo $this->Url->build('/admin/users', true); ?>"> <i class="menu-icon fa fa-user"></i>Users </a>
                     </li>
-                    <li class="<?php echo ($this->request->getParam('controller') == 'Home' )?'active' :'' ?>">
-                        <a href="index.html"> <i class="menu-icon fa fa-cogs"></i>Settings </a>
+                    <li class="<?php echo ($this->request->getParam('controller') == 'Users' )?'active' :'' ?>">
+                        <a href="<?php echo $this->Url->build('/admin/users/setting', true); ?>"> <i class="menu-icon fa fa-cogs"></i>Settings </a>
                     </li>
-
-                    <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
-                        </ul>
+                    <li>
+                    <?= $this->Form->postLink("<i class='menu-icon fa fa-sign-out'></i> Logout", ['controller'=>'users','action' => 'logout'], ['confirm' => __('Are you sure you want to logout ?'),'escape'=>false]) ?>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

@@ -25,7 +25,7 @@
             </div>
             <div class="fl_right">
                 <ul class="nospace inline pushright">
-                    <li><i class="fa fa-sign-in"></i> <a href="#">Login</a></li>
+                    <li><i class="fa fa-sign-in"></i> <a href="<?php echo $this->Url->build('/admin',true) ?>">Login</a></li>
                 </ul>
             </div>
             <!-- ################################################################################################ -->

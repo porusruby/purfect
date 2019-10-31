@@ -77,7 +77,7 @@ class PostsController extends AppController
 
                     $post = $this->Posts->patchEntity($post, $this->request->getData());
                     $post->image= $fileName;
-                    $post->user_id= $this->Auth->user('id');;
+                    $post->user_id= $this->Auth->user('id');
                     if ($this->Posts->save($post)) {
                         $this->Flash->success(__('The post has been saved.'));
         
