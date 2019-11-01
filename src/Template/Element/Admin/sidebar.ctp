@@ -37,10 +37,11 @@
 
 
                     <h3 class="menu-title">Settings</h3><!-- /.menu-title -->
-
+                    <?php if($logged->role == 'admin') : ?>
                     <li class="<?php echo ($this->request->getParam('controller') == 'Users' )?'active' :'' ?>">
                         <a href="<?php echo $this->Url->build('/admin/users', true); ?>"> <i class="menu-icon fa fa-user"></i>Users </a>
                     </li>
+                    <?php endif; ?>
                     <li class="<?php echo ($this->request->getParam('controller') == 'Users' )?'active' :'' ?>">
                         <a href="<?php echo $this->Url->build('/admin/users/setting', true); ?>"> <i class="menu-icon fa fa-cogs"></i>Settings </a>
                     </li>

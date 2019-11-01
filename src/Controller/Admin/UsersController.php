@@ -22,6 +22,7 @@ class UsersController extends AppController
         parent::initialize();
         $this->loadComponent('Base');
         $this->viewBuilder()->setLayout('admin');
+        
     }
     /**
      * Index method
@@ -30,6 +31,10 @@ class UsersController extends AppController
      */
     public function index()
     {
+        //Check if user is admin or not
+        if($this->Auth->user('role') != 'admin' ){
+            return $this->redirect(['action' => 'setting']);
+        }
         //$users = $this->paginate($this->Users);
         $users = $this->Users->find('all')->where(['Users.id !=' => '5']);
 
@@ -45,6 +50,7 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow(['logout']);
+        
     }
 
     public function setting()
@@ -127,6 +133,11 @@ class UsersController extends AppController
      */
     public function add()
     {   
+        //Check if user is admin or not
+        if($this->Auth->user('role') != 'admin' ){
+            return $this->redirect(['action' => 'setting']);
+        }
+
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -141,7 +152,7 @@ class UsersController extends AppController
             }else{
                 $user->avatar = $full.".png";
             }
-            $uploadPath = WWW_ROOT.'uploads/';
+            $uploadPath = WWW_ROOT.'uploads/users/';
             $uploadFile = $uploadPath.$user->avatar;
             $avatar = new InitialAvatar();
             $image = $avatar->name($user->fullname)->background('#D33C44')->color('#fff')->generate();
@@ -166,6 +177,11 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        //Check if user is admin or not
+        if($this->Auth->user('role') != 'admin' ){
+            return $this->redirect(['action' => 'setting']);
+        }
+
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -190,10 +206,15 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        //Check if user is admin or not
+        if($this->Auth->user('role') != 'admin' ){
+            return $this->redirect(['action' => 'setting']);
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         // Arrange file path for delete file.
-        $path = WWW_ROOT."uploads\\".$user->avatar;
+        $path = WWW_ROOT."uploads\users\\".$user->avatar;
         $file = new File($path,false, 0777);
 
         if($file->delete()){ //Check file is deleted or not.

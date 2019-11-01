@@ -16,7 +16,7 @@ $this->assign('title','Setting Account')
                 <div class="card-body card-block">
                     <div class="form-group">
                         <label for="">Avatar</label><br>
-                        <img src="<?php echo $this->Url->image("/uploads/").$user->avatar ?>" style="max-height:150px"><br>
+                        <img src="<?php echo $this->Url->image("/uploads/users/").$user->avatar ?>" style="max-height:150px"><br>
                         <input type="file" name="myFile" class="">
                     </div>
                     <div class="form-group">
