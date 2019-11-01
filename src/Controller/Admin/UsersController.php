@@ -44,7 +44,7 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['add','logout']);
+        $this->Auth->allow(['logout']);
     }
 
     public function setting()
@@ -52,7 +52,7 @@ class UsersController extends AppController
         $id   = $this->Auth->user('id');
         $user = $this->Users->findById($id)->first();
 
-        if ($this->request->is(['patch', 'post', 'put'])){
+        if ($this->request->is(['patch', 'user', 'put'])){
             $fileName = $this->request->getData('myFile.name');
             $oldData = $this->Users->findById($id)->first();
             $allowed =  array('gif','png' ,'jpg','jpeg');
@@ -66,7 +66,12 @@ class UsersController extends AppController
                 // Arrange file path for delete old file and upload new file.
                 $path = WWW_ROOT."uploads\\".$oldData->avatar;
                 $file = new File($path,false, 0777);
-                $file->delete();
+                if( $file->delete() ){
+
+                }else{
+                    unlink($path);
+                }
+               
 
                 move_uploaded_file($this->request->data['myFile']['tmp_name'],$uploadFile);
                 // Compress Image using Resmush API
@@ -85,12 +90,12 @@ class UsersController extends AppController
    
             if ($this->Users->save($user)) {
                 
-                $this->Flash->success(__('The post has been Updated.'));
+                $this->Flash->success(__('The user has been Updated.'));
                 return $this->redirect(['action' => 'setting']);
 
             }else{
 
-                $this->Flash->error(__('The post could not be deleted. Please, try again.'));
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
 
             }
 
@@ -121,11 +126,28 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add()
-    {
+    {   
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+
+            //Generate Initial Avatar
+            $lowerTitle = strtolower($user->fullname);
+            $full = Text::slug($lowerTitle);
+            $count = $this->Users->find('all',array('conditions'=> array('Users.fullname'=> $user->fullname)))->count();
+            $no    = intval($count);
+            if( $count > 0 ) {
+                $user->avatar = $full."-".$no.".png";
+            }else{
+                $user->avatar = $full.".png";
+            }
+            $uploadPath = WWW_ROOT.'uploads/';
+            $uploadFile = $uploadPath.$user->avatar;
+            $avatar = new InitialAvatar();
+            $image = $avatar->name($user->fullname)->background('#D33C44')->color('#fff')->generate();
+            
             if ($this->Users->save($user)) {
+                file_put_contents($uploadFile, $image->save('png', 100));
                 $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -170,10 +192,18 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+        // Arrange file path for delete file.
+        $path = WWW_ROOT."uploads\\".$user->avatar;
+        $file = new File($path,false, 0777);
+
+        if($file->delete()){ //Check file is deleted or not.
+            if ($this->Users->delete($user)) {
+                $this->Flash->success(__('The user has been deleted.'));
+            } else {
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            }
+        }else{
+            $this->Flash->error(__("Image for this data , can't remove."));
         }
 
         return $this->redirect(['action' => 'index']);
